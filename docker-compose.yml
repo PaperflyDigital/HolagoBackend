@@ -1,52 +1,52 @@
 version: '3'
 
 networks:
-  holagoBackend-production-network:
+  holagobackend-production-network:
     driver: bridge
 
 services:
-  holagoBackend_production_backend:
-    container_name: holagoBackend_production_backend
+  holagobackend_production_backend:
+    container_name: holagobackend_production_backend
     restart: always
     build:
       context: .
       dockerfile: Dockerfile # Path to your Dockerfile for holagoBackend backend
     networks:
-      - holagoBackend-production-network
+      - holagobackend-production-network
     env_file:
       - .env # Environment variables for holagoBackend backend
     volumes:
-      - .:/app
+      - .:/app # Bind mount the current directory to /app in the container
     ports:
       - '127.0.0.1:4000:8080' # New port for holagoBackend backend
     depends_on:
-      - holagoBackend_production_mongo
+      - holagobackend_production_mongo
 
-  holagoBackend_production_mongo:
-    container_name: holagoBackend_production_mongo
+  holagobackend_production_mongo:
+    container_name: holagobackend_production_mongo
     restart: always
     image: mongo
     ports:
       - '8070:27017' # New port for MongoDB
     networks:
-      - holagoBackend-production-network
+      - holagobackend-production-network
     volumes:
-      - /home/holagoBackend_persistent/mongodb:/data/db
+      - /home/holagobackend_persistent/mongodb:/data/db
     env_file:
       - .env
 
-  holagoBackend_production_mongo_express:
-    container_name: holagoBackend_production_mongo_express
+  holagobackend_production_mongo_express:
+    container_name: holagobackend_production_mongo_express
     image: mongo-express
     restart: always
     ports:
       - '127.0.0.1:6071:7071' # New port for Mongo Express
     networks:
-      - holagoBackend-production-network
+      - holagobackend-production-network
     env_file:
       - .env
     depends_on:
-      - holagoBackend_production_mongo
+      - holagobackend_production_mongo
 
 volumes:
   cache:
