@@ -27,7 +27,7 @@ services:
     restart: always
     image: mongo
     ports:
-      - '7070:27017' # New port for MongoDB
+      - '8070:27017' # New port for MongoDB
     networks:
       - holagoBackend-production-network
     volumes:
@@ -40,7 +40,7 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - '127.0.0.1:7071:7071' # New port for Mongo Express
+      - '127.0.0.1:6071:7071' # New port for Mongo Express
     networks:
       - holagoBackend-production-network
     env_file:
