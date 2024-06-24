@@ -18,7 +18,7 @@ services:
     volumes:
       - .:/app # Bind mount the current directory to /app in the container
     ports:
-      - '127.0.0.1:4000:8080' # New port for holagoBackend backend
+      - '127.0.0.1:7000:8080' # New port for holagoBackend backend
     depends_on:
       - holagobackend_production_mongo
 
