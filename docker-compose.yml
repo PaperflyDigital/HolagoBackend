@@ -1,52 +1,52 @@
 version: '3'
 
 networks:
-  holagobackend-production-network:
+  holago-production-network:
     driver: bridge
 
 services:
-  holagobackend_production_backend:
-    container_name: holagobackend_production_backend
+  holago_production_backend:
+    container_name: holago_production_backend
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile # Path to your Dockerfile for holagoBackend backend
+      dockerfile: Dockerfile # Path to your Dockerfile for Holago backend
     networks:
-      - holagobackend-production-network
+      - holago-production-network
     env_file:
-      - .env # Environment variables for holagoBackend backend
+      - .env # Environment variables for Holago backend
     volumes:
-      - .:/app # Bind mount the current directory to /app in the container
+      - .:/app
     ports:
-      - '127.0.0.1:7000:8080' # New port for holagoBackend backend
+      - '103.191.51.223:5000:8080' # Port mapping for Holago backend
     depends_on:
-      - holagobackend_production_mongo
+      - holago_production_mongo
 
-  holagobackend_production_mongo:
-    container_name: holagobackend_production_mongo
+  holago_production_mongo:
+    container_name: holago_production_mongo
     restart: always
     image: mongo
     ports:
-      - '8070:27017' # New port for MongoDB
+      - '103.191.51.223:9090:27017' # Port mapping for MongoDB
     networks:
-      - holagobackend-production-network
+      - holago-production-network
     volumes:
-      - /home/holagobackend_persistent/mongodb:/data/db
+      - /home/holago_persistent/mongodb:/data/db
     env_file:
       - .env
 
-  holagobackend_production_mongo_express:
-    container_name: holagobackend_production_mongo_express
+  holago_production_mongo_express:
+    container_name: holago_production_mongo_express
     image: mongo-express
     restart: always
     ports:
-      - '127.0.0.1:6071:7071' # New port for Mongo Express
+      - '103.191.51.223:8081:8081' # Port mapping for Mongo Express
     networks:
-      - holagobackend-production-network
+      - holago-production-network
     env_file:
       - .env
     depends_on:
-      - holagobackend_production_mongo
+      - holago_production_mongo
 
 volumes:
   cache:
