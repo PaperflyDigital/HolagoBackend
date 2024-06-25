@@ -41,6 +41,8 @@ const whitelist = [
   'http://localhost:3001',
   'http://localhost:3004',
   'http://localhost:3005',
+  'https://manage.holago.com.bd',
+  'http://localhost:7007',
   '*',
 ];
 const corsOptions = {
