@@ -10,15 +10,15 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile # Path to your Dockerfile for Holago backend
+      dockerfile: Dockerfile # Path to your Dockerfile for holago backend
     networks:
       - holago-production-network
     env_file:
-      - .env # Environment variables for Holago backend
+      - .env # Environment variables for holago backend
     volumes:
       - .:/app
     ports:
-      - '103.191.51.223:5000:8080' # Port mapping for Holago backend
+      - '127.0.0.1:5000:8080' # New port for holago backend
     depends_on:
       - holago_production_mongo
 
@@ -27,7 +27,7 @@ services:
     restart: always
     image: mongo
     ports:
-      - '103.191.51.223:9090:27017' # Port mapping for MongoDB
+      - '9090:27017' # New port for MongoDB
     networks:
       - holago-production-network
     volumes:
@@ -40,7 +40,7 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - '103.191.51.223:8081:8081' # Port mapping for Mongo Express
+      - '127.0.0.1:3071:3071' # New port for Mongo Express
     networks:
       - holago-production-network
     env_file:
